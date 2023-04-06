@@ -19,7 +19,7 @@ scale = Vector2( 0.9375, 1.25 )
 polygon = PoolVector2Array( 16, 8, 16, 8, 0, -16, -16, 8 )
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 2.0
 autostart = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
