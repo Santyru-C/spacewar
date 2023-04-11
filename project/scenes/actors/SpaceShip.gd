@@ -24,10 +24,11 @@ func _physics_process(delta):
 		velocity += acceleration.rotated(rotation)
 		#velocity -= transform.y * speed
 	if Input.is_action_pressed("boost"):
-		max_speed += 10
+		max_speed = lerp(max_speed, 500, 0.8)
+		print(max_speed)
 	else:
 		if max_speed > 250:
-			max_speed -= 5
+			max_speed -= 3
 		
 	
 	if velocity.length() > 0:
@@ -39,4 +40,4 @@ func _physics_process(delta):
 
 
 func _on_Timer_timeout():
-	print()
+	print(max_speed)
