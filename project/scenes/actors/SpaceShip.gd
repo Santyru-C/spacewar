@@ -8,7 +8,7 @@ var velocity = Vector2()
 var rotation_dir = 0
 var rotation_speed = 1.5
 var friction = Vector2(1, 0)
-
+var energy = 1000
 	#velocity = transform.y * acceleration
 func get_input():
 	rotation_dir = 0
@@ -23,12 +23,14 @@ func _physics_process(delta):
 	if Input.is_action_pressed("ui_up"):
 		velocity += acceleration.rotated(rotation)
 		#velocity -= transform.y * speed
-	if Input.is_action_pressed("boost"):
-		max_speed = lerp(max_speed, 500, 0.8)
+	if Input.is_action_pressed("boost") and energy > 0:
+		max_speed = lerp(max_speed, 500, 0.05)
+		energy -= 2
 		print(max_speed)
 	else:
 		if max_speed > 250:
 			max_speed -= 3
+			energy += 1
 		
 	
 	if velocity.length() > 0:
@@ -41,3 +43,4 @@ func _physics_process(delta):
 
 func _on_Timer_timeout():
 	print(max_speed)
+	print(energy)
