@@ -16,7 +16,10 @@ func get_input():
 		rotation_dir += 1
 	if Input.is_action_pressed('ui_left'):
 		rotation_dir -= 1
-		
+
+func _process(_delta):
+	$LifeDisplay.update_display($HealthModule.current_health)
+	
 func _physics_process(delta):
 	get_input()
 	rotation += rotation_dir * rotation_speed * delta
@@ -26,11 +29,15 @@ func _physics_process(delta):
 	if Input.is_action_pressed("boost") and energy > 0:
 		max_speed = lerp(max_speed, 500, 0.05)
 		energy -= 2
-		print(max_speed)
+		
 	else:
 		if max_speed > 250:
-			max_speed -= 3
-			energy += 1
+			max_speed = lerp(max_speed, 250, 0.01)
+		
+	
+		#add timer check
+		if max_speed <= 260:
+			energy = lerp(energy, 1000, 0.009)
 		
 	
 	if velocity.length() > 0:
@@ -42,5 +49,13 @@ func _physics_process(delta):
 
 
 func _on_Timer_timeout():
-	print(max_speed)
-	print(energy)
+	print("Max Speed: ", max_speed)
+	print("Energy: ", energy)
+
+
+func _on_EnergyTimer_timeout():
+	pass
+
+
+func _on_health_depleted():
+	self.queue_free()
