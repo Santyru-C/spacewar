@@ -15,3 +15,9 @@ func substract_energy(amount):
 	
 func recharge():
 	current_energy = lerp(current_energy, max_energy, recovery_weight)
+
+func toggle_recharge():
+	if recharge_enabled:
+		recharge_enabled = false
+	else:
+		recharge_enabled = true
