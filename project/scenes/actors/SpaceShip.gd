@@ -1,14 +1,16 @@
 extends KinematicBody2D
 
-var max_speed = 250
+export(int) var max_speed = 250
+export(float) var rotation_speed = 1.5
+export(Vector2) var friction = Vector2(1, 0)
 var acceleration = Vector2(0, -30)
-
 var velocity = Vector2()
 var rotation_dir = 0
-var rotation_speed = 1.5
-var friction = Vector2(1, 0)
+
 func get_input():
 	rotation_dir = 0
+	if Input.is_action_pressed("ui_accept"):
+		$Gun.shoot()
 	if Input.is_action_pressed('ui_right'):
 		rotation_dir += 1
 	if Input.is_action_pressed('ui_left'):
