@@ -10,8 +10,11 @@ export(float) var recovery_weight = 0.009
 var current_energy = 0
 var recharge_enabled = false
 
+func _ready():
+	current_energy = max_energy
+	
 func substract_energy(amount):
-	max_energy -= amount
+	current_energy -= amount
 	
 func recharge():
 	current_energy = lerp(current_energy, max_energy, recovery_weight)
