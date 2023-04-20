@@ -4,8 +4,8 @@
 [ext_resource path="res://scenes/actors/SpaceShip.gd" type="Script" id=2]
 [ext_resource path="res://nodes/HurtBox.gd" type="Script" id=3]
 [ext_resource path="res://nodes/HealthModule.gd" type="Script" id=4]
-[ext_resource path="res://nodes/PropertyDisplay.gd" type="Script" id=5]
 [ext_resource path="res://scenes/Gun.tscn" type="PackedScene" id=6]
+[ext_resource path="res://nodes/EnergyModule.gd" type="Script" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 12 )
@@ -29,8 +29,6 @@ polygon = PoolVector2Array( 16, 8, 16, 8, 0, -16, -16, 8 )
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
-[node name="EnergyTimer" type="Timer" parent="."]
-
 [node name="HealthModule" type="Node" parent="."]
 script = ExtResource( 4 )
 max_health = 100
@@ -43,15 +41,11 @@ health_module_path = NodePath("../HealthModule")
 position = Vector2( 0, 4 )
 shape = SubResource( 1 )
 
-[node name="LifeDisplay" type="Label" parent="."]
-margin_right = 56.0
-margin_bottom = 14.0
-script = ExtResource( 5 )
-property_name = "Life"
-
 [node name="Gun" parent="." instance=ExtResource( 6 )]
-position = Vector2( 0, -25 )
+position = Vector2( 0, -30 )
+
+[node name="EnergyModule" type="Node" parent="."]
+script = ExtResource( 7 )
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
-[connection signal="timeout" from="EnergyTimer" to="." method="_on_EnergyTimer_timeout"]
 [connection signal="health_depleted" from="HealthModule" to="." method="_on_health_depleted"]
