@@ -1,9 +1,5 @@
 extends Control
 
-
-func _ready():
-	pass
-
 func on_energy_module_down(amount):
 	$EnergyBar.value -= amount
 
@@ -15,3 +11,6 @@ func on_charge_used():
 
 func on_charges_recovered():
 	$ChargesBar.value = $ChargesBar.max_value
+
+func on_max_charges_updated(amount):
+	$ChargesBar.max_value = amount

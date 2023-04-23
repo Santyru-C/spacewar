@@ -28,11 +28,12 @@ func shoot():
 		set_fire_cooldown()
 		instance_proyectile()
 	
-	if current_charges == 0 and !$RechargeTimer.time_left > 0:
+	if (current_charges == 0 and !($RechargeTimer.time_left > 0)):
 		$RechargeTimer.start()
 
 
 func _on_RechargeTimer_timeout():
+	$RechargeTimer.stop()
 	current_charges = max_charges
 	emit_signal("charges_recoverd")
 
