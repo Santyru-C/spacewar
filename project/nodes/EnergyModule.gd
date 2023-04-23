@@ -6,7 +6,9 @@ signal energy_down(amount)
 signal recovering(amount)
 
 export(int) var max_energy = 500
-export(float) var recovery_weight = 0.009
+export(float) var r_weight1 = 0.009
+export(float) var r_weight2 = 0.018
+
 var current_energy = 0
 var recharge_enabled = false
 
@@ -18,7 +20,10 @@ func substract_energy(amount):
 	emit_signal("energy_down",amount)
 	
 func recharge():
-	current_energy = lerp(current_energy, max_energy, recovery_weight)
+	if current_energy < max_energy/2:
+		current_energy = lerp(current_energy, max_energy, r_weight1)
+	else:
+		current_energy = lerp(current_energy, max_energy, r_weight2)
 	emit_signal("recovering", current_energy)
 
 func toggle_recharge():
