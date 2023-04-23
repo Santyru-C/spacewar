@@ -5,6 +5,7 @@ export(int) var max_charges = 3
 var current_charges = 0
 var can_fire = true
 
+signal update_max_charges(amount)
 signal charge_used
 signal charges_recoverd
 
@@ -37,3 +38,4 @@ func _on_RechargeTimer_timeout():
 
 func _ready():
 	current_charges = max_charges
+	emit_signal("update_max_charges", max_charges)
