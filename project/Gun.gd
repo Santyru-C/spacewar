@@ -27,7 +27,7 @@ func shoot():
 		set_fire_cooldown()
 		instance_proyectile()
 	
-	if current_charges == 0:
+	if current_charges == 0 and !$RechargeTimer.time_left > 0:
 		$RechargeTimer.start()
 
 
