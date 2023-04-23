@@ -10,11 +10,12 @@ var current_health
 func _ready():
 	current_health = max_health
 	print("ready")
-	
+
+func check_life_depleted():
+	if current_health <= 0:
+		emit_signal("health_depleted")
+		
 func substract_from_health(amount):
 	current_health -= amount
-	print(amount)
 	emit_signal("health_down")
-	
-func _process(delta):
-	pass
+	check_life_depleted()
