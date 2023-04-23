@@ -1,21 +1,26 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/Main Ship - Base - Full health.png" type="Texture" id=1]
 [ext_resource path="res://scenes/actors/SpaceShip.gd" type="Script" id=2]
 [ext_resource path="res://nodes/HurtBox.gd" type="Script" id=3]
 [ext_resource path="res://nodes/HealthModule.gd" type="Script" id=4]
+[ext_resource path="res://nodes/HitBox.gd" type="Script" id=5]
 [ext_resource path="res://scenes/Gun.tscn" type="PackedScene" id=6]
 [ext_resource path="res://nodes/EnergyModule.gd" type="Script" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 12 )
 
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 8, 4 )
+
 [node name="SpaceShip" type="KinematicBody2D"]
-position = Vector2( 136, 280 )
+position = Vector2( 136, 272 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
+friction = Vector2( 2, 0 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
@@ -26,15 +31,15 @@ position = Vector2( -1.96695e-06, 5 )
 scale = Vector2( 0.9375, 1.25 )
 polygon = PoolVector2Array( 16, 8, 16, 8, 0, -16, -16, 8 )
 
-[node name="Timer" type="Timer" parent="."]
-autostart = true
-
 [node name="HealthModule" type="Node" parent="."]
 script = ExtResource( 4 )
 max_health = 100
 
 [node name="HurtBox" type="Area2D" parent="."]
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
 health_module_path = NodePath("../HealthModule")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
@@ -47,5 +52,17 @@ position = Vector2( 0, -30 )
 [node name="EnergyModule" type="Node" parent="."]
 script = ExtResource( 7 )
 
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[node name="HitBox" type="Area2D" parent="."]
+position = Vector2( 0, -15 )
+collision_layer = 3
+collision_mask = 3
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource( 2 )
+
 [connection signal="health_depleted" from="HealthModule" to="." method="_on_health_depleted"]
+[connection signal="area_entered" from="HitBox" to="." method="_on_HitBox_area_entered"]

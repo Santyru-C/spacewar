@@ -39,11 +39,8 @@ func _physics_process(delta):
 	velocity = velocity.limit_length(max_speed)
 	velocity = move_and_slide(velocity)
 
-
-func _on_Timer_timeout():
-	print("Max Speed: ", max_speed)
-	print("Energy: ", $EnergyModule.current_energy)
-
-
 func _on_health_depleted():
 	self.queue_free()
+
+func _on_HitBox_area_entered(area):
+	print("hello")
