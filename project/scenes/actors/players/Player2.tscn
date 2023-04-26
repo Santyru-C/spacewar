@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scenes/actors/SpaceShip.tscn" type="PackedScene" id=1]
+
+[node name="Player2" instance=ExtResource( 1 )]
+move_up_action = "p2_up"
+move_down_action = "p2_down"
+move_left_action = "p2_left"
+move_right_action = "p2_right"
+shoot_action = "p2_shoot"
+boost_action = "p2_boost"
