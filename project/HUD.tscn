@@ -7,21 +7,31 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
 
-[node name="EnergyBar" type="ProgressBar" parent="."]
-margin_left = 48.0
-margin_top = 568.0
-margin_right = 264.0
-margin_bottom = 592.0
-max_value = 500.0
-value = 500.0
-percent_visible = false
+[node name="PlayerController1" type="Control" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
 
-[node name="ChargesBar" type="ProgressBar" parent="."]
-margin_left = 48.0
-margin_top = 560.0
-margin_right = 264.0
-margin_bottom = 574.0
-max_value = 3.0
-step = 1.0
-value = 3.0
-percent_visible = false
+[node name="Label" type="Label" parent="PlayerController1"]
+margin_top = -16.0
+margin_right = 136.0
+text = "Press \"X\" to start"
+align = 1
+valign = 1
+
+[node name="PlayerController2" type="Control" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+
+[node name="Label" type="Label" parent="PlayerController2"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -136.0
+margin_top = -16.0
+text = "Press \"X\" to start"
+align = 1
+valign = 1
